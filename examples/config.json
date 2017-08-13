@@ -1,0 +1,8 @@
+{
+   "jobId":0,
+   "numberOfTests":10,
+   "problemId":0,
+   "testBase":"test",
+   "maxMemory":15000,
+   "maxTime": 1000
+}
