@@ -24,7 +24,6 @@ void container::containerCreate(){
 }
 void container::resourceInsert(const char from[], const char to[]){
   sprintf(str, "sudo docker cp /var/epicnode/jobs/%i/%s id%i:/var/epicnode/executable-handler/%s", jobId, from, jobId, to);
-  cout<<str;
   system(str);
 }
 void container::resourceExtract(const char from[], const char to[]){
@@ -40,6 +39,6 @@ void container::containerRemove(){
   system(str);
 }
 void container::containerExecute(){
-  sprintf(str, "sudo docker exec id%i var/epicnode/executable-handler/epicnode", jobId);
+  sprintf(str, "sudo docker exec id%i /bin/sh -f /var/epicnode/start.sh", jobId);
   system(str);
 }

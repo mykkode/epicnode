@@ -5,8 +5,6 @@ src/executable-handler/executable-handler
 
 src/executable-handler/config\.json
 
-src/executable-handler/examples/config\.json
-
 src/executable-handler/executable/main
 
 src/executable-handler/executable/main\.cpp
