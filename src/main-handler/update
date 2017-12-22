@@ -1,0 +1,4 @@
+#!/bin/bash  
+var="$(grep -m 1 "BUILD" src/main-handler.cpp | awk '{print $3}')"
+line="$(grep -n -m 1 "BUILD" src/main-handler.cpp | awk -F ':' '{print $1}')"
+sed -i "$((line))s/$var/$((var+1))/1" src/main-handler.cpp

@@ -22,3 +22,9 @@ src/executable-handler/raport\.json
 src/main-handler/from/config\.json
 
 src/main-handler/main-handler
+
+*.o
+
+src/main-handler/update\.save\.1
+
+src/main-handler/update\.save
