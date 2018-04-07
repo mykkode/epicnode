@@ -5,24 +5,25 @@ using namespace std;
 
 #include <vector>
 #include <thread>       // multiple threads
-
-#include "job-handler.hpp"
-
-extern int const NUMBER_OF_THREADS;
+#include <unistd.h>		//sleep
+#include "access-handler.hpp"
 
 class threadHandler{
 private:
-  vector < thread > threads;
-  vector < int > status;
-  accessHandler * ah;
-  jobHandler * jh;
+	vector < thread > threads;
+	vector < int > status;
+	vector <int> list;
+	accessHandler * ah;
+	int locked, NUMBER_OF_THREADS;
 public:
-
-  threadHandler(accessHandler * localAh);
-
-  void spawnThreads();
-  void threadFlow(int threadId);
-  int getJob();
+	threadHandler(accessHandler * localAh, int NOT);
+	void spawnThreads();
+	void threadFlow(int threadId);
+	void insertJob(int jid);
+	void finishJob();
+	void finalizeThreads();
+	int getJob();
+	int available();
 };
 
 #endif

@@ -16,8 +16,7 @@ private:
   unique_ptr < sql::PreparedStatement > pstmt;
   unique_ptr < sql::ResultSet > result;
 public:
-  void bindInt(int *i, int *j);
-  void bindInt(int i, int *j);
+  void bindInt(int i, int j);
   void bindString(int *i, string j);
   void bindString(int i, string j);
   int next();

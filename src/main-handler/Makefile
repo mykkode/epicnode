@@ -1,14 +1,11 @@
-all: newBuild clean main-handler.o access-handler.o job-handler.o thread-handler.o database-handler.o errors.o
-	g++ -Wall main-handler.o access-handler.o job-handler.o thread-handler.o database-handler.o errors.o -lmysqlcppconn -pthread -o main-handler
+all: newBuild clean main-handler.o access-handler.o thread-handler.o database-handler.o errors.o
+	g++ -Wall main-handler.o access-handler.o thread-handler.o database-handler.o errors.o -lmysqlcppconn -pthread -o main-handler
 
 main-handler.o: src/main-handler.cpp
 	g++ -c src/main-handler.cpp
 
 access-handler.o: src/main-handler.cpp
 	g++ -c src/access-handler.cpp
-
-job-handler.o: src/job-handler.cpp
-	g++ -c src/job-handler.cpp
 
 thread-handler.o: src/thread-handler.cpp
 	g++ -c src/thread-handler.cpp
