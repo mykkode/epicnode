@@ -28,9 +28,15 @@
 
       state = 2;
     }
-    catch(...){
-      printf("~~~THROWN~~~ DATABASE-HANDLER.CPP - CONNECT");
-    }
+    catch (sql::SQLException &e) {
+       cout << "# ERR: SQLException in " << __FILE__;
+       cout << "(" << __FUNCTION__ << ") on line "
+          << __LINE__ << endl;
+       cout << "# ERR: " << e.what();
+       cout << " (MySQL error code: " << e.getErrorCode();
+       cout << ", SQLState: " << e.getSQLState() << " )" << endl;
+     }
+
   }
 
   void dataBaseHandler::prepareStatement(preparedStatement * psLocal, string preparedQuerry){
@@ -51,6 +57,9 @@
   }
   void preparedStatement::bindInt(int i, int *j){
     pstmt->setInt(i, *j);
+  }
+  void preparedStatement::bindInt(int i, int j){
+    pstmt->setInt(i, j);
   }
   void preparedStatement::bindString(int *i, string j){
     pstmt->setString(*i, j);

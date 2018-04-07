@@ -4,14 +4,14 @@ using namespace std;
 #define ACCESSHANDLER_H
 
 #include <mutex>        		//used for locking variables - data race
-#include <condition_variable>	//non cpu intensive waiting
+#include <condition_variable>		//non cpu intensive waiting
 
 class accessHandler{
 private:
   condition_variable condition;
 public: 
   mutex m;
-  void announce(int *x);
+  void announce(int x);
   void freeze();
 };
 

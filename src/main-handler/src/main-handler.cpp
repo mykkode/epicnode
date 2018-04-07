@@ -6,13 +6,14 @@
 #include <wait.h>       //wait for pid
 #include <unistd.h>     //fork and things
 #include <stdlib.h>     //things for malloc, free and others
+#include <iostream>
 #include <string>
 #include "../inc/errors.hpp"
 
 using namespace std;
 
 #define VERSION 1
-#define BUILD 148
+#define BUILD 171
 #define TITLE "EPICNODE - INGENNUS"
 
 int const NUMBER_OF_THREADS = 2;
@@ -129,65 +130,66 @@ int main(){
 
     try{
       dbh->begin();
-      dbh->connect("tcp://127.0.0.1:3306", "mykkode", "Radu005600", "epicnode");
-
-      preparedStatement * ps = new preparedStatement;
-
-      dbh->prepareStatement(ps, "SELECT `startServerSession`(?) AS `startServerSession`;");
-
-      ps->bindString(1, "testServer");
-      ps->execute();
-
-      if(ps->next()){
-        SID = ps->getInt("startServerSession");
-      }
-
-      delete ps;
+      dbh->connect("tcp://127.0.0.1:3306", "epicUser", "devtest", "epic");
+//
+//      preparedStatement * ps = new preparedStatement;
+//
+//      dbh->prepareStatement(ps, "SELECT `startServerSession`(?) AS `startServerSession`;");
+//
+//      ps->bindString(1, "testServer");
+//      ps->execute();
+//
+//      if(ps->next()){
+//        SID = ps->getInt("startServerSession");
+//      }
+//
+//      delete ps;
     }
-    // catch (sql::SQLException &e) {
-    //   cout << "# ERR: SQLException in " << __FILE__;
-    //   cout << "(" << __FUNCTION__ << ") on line " 
-    //      << __LINE__ << endl;
-    //   cout << "# ERR: " << e.what();
-    //   cout << " (MySQL error code: " << e.getErrorCode();
-    //   cout << ", SQLState: " << e.getSQLState() << " )" << endl;
-    // }
-    // catch (int &e){
-    //   cout<< errorName[e]<<endl;
-    // }
+//     catch (sql::SQLException &e) {
+//       cout << "# ERR: SQLException in " << __FILE__;
+//       cout << "(" << __FUNCTION__ << ") on line "
+//          << __LINE__ << endl;
+//       cout << "# ERR: " << e.what();
+//       cout << " (MySQL error code: " << e.getErrorCode();
+//       cout << ", SQLState: " << e.getSQLState() << " )" << endl;
+//     }
+     catch (int &e){
+       cout<< errorName[e]<<endl;
+     }
     catch(...){
       printf("NOT OK");
     }
     
     try{
-      preparedStatement * ps = new preparedStatement;
-      dbh->prepareStatement(ps, "CALL `getJobs`(?, ?);");
-
-      ps->bindInt(1,SID);
-      ps->bindInt(2,(int)NUMBER_OF_THREADS);
-      
-      while(state){
-        ps->bindInt(2, th->available());
-        ps->execute();
-
-        while(ps->next()){
-          JID = ps->getInt("id");
-          printf("--Thread-h: new job: %d\n",JID);
-          th->insertJob(JID);
-        }
-          
-        ps->getMoreResults();
-        sleep(1);
-      }
-      delete ps;
-      
-      th->finalizeThreads();
-
-      exit(SIGTERM);
-      
+//      preparedStatement * ps = new preparedStatement;
+//      dbh->prepareStatement(ps, "CALL `getJobs`(?, ?);");
+//
+//      ps->bindInt(1,SID);
+//      ps->bindInt(2,(int)NUMBER_OF_THREADS);
+//
+//      while(state){
+//        ps->bindInt(2, th->available());
+//        ps->execute();
+//
+//        while(ps->next()){
+//          JID = ps->getInt("id");
+//          printf("--Thread-h: new job: %d\n",JID);
+//          th->insertJob(JID);
+//        }
+//
+//        ps->getMoreResults();
+//        sleep(1);
+//      }
+//      delete ps;
+//
+//      th->finalizeThreads();
+//
+//      exit(SIGTERM);
+//
 
     }
-    catch(...){}
-    printf("NOT OK22");
+    catch(...) {
+        printf("NOT OK22");
+    }
   }
 }
