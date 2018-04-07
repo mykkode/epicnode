@@ -13,7 +13,7 @@
 using namespace std;
 
 #define VERSION 1
-#define BUILD 211
+#define BUILD 228
 #define TITLE "EPICNODE - INGENNUS"
 
 int const NUMBER_OF_THREADS = 2;
@@ -176,20 +176,18 @@ int main(){
           printf("--Thread-h: new job: %d\n",JID);
           th->insertJob(JID);
         }
-
         ps->getMoreResults();
-        sleep(1);
+        usleep(1000);
+
       }
       delete ps;
 
       th->finalizeThreads();
-
       exit(SIGTERM);
 
-
     }
-    catch(...) {
-        printf("NOT OK22");
+    catch(...){
+        printf("FINAL THROWN");
     }
   }
 }

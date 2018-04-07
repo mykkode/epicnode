@@ -41,8 +41,11 @@ void threadHandler::threadFlow(int threadId){
       printf("----Thread-%i: thread safe exit\n",threadId);
       return ;
     }
-    
     printf("----Thread-%i: taking job %i\n",threadId,job);
+
+
+    printf("----Thread-%i: finished  job %i\n",threadId,job);
+    finishJob();
   }
 }
 
