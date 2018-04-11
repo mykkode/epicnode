@@ -13,71 +13,11 @@
 using namespace std;
 
 #define VERSION 1
-#define BUILD 231
+#define BUILD 244
 #define TITLE "EPICNODE - INGENNUS"
 
 int const NUMBER_OF_THREADS = 2;
 int state = 1;
-/*
-class container{
-private:
-  int jobId;
-  char str[256];
-public:
-  container(int jobIdLocal);
-  void containerCreate();
-  void resourceInsert(const char from[],const  char to[]);
-  void resourceExtract(const char from[],const  char to[]);
-  void containerStop();
-  void containerRemove();
-  void containerExecute();
-};
-container::container(int jobIdLocal){
-jobId=jobIdLocal;
-printf("OK\n");
-}
-void container::containerCreate(){
-  sprintf(str, "sudo docker run -itd --name id%i mykkode/epicnode", jobId);
-  system(str);
-}
-void container::resourceInsert(const char from[], const char to[]){
-  sprintf(str, "sudo docker cp /var/epicnode/jobs/%i/%s id%i:/var/epicnode/executable-handler/%s", jobId, from, jobId, to);
-  system(str);
-}
-void container::resourceExtract(const char from[], const char to[]){
-  sprintf(str, "sudo docker cp id%i:/var/epicnode/executable-handler/%s /var/epicnode/jobs/%i/%s", jobId, from, jobId, to);
-  system(str);
-}
-void container::containerStop(){
-  sprintf(str, "sudo docker stop id%i", jobId);
-  system(str);
-}
-void container::containerRemove(){
-  sprintf(str, "sudo docker rm id%i", jobId);
-  system(str);
-}
-void container::containerExecute(){
-  sprintf(str, "sudo docker exec id%i /bin/sh -f /var/epicnode/start.sh", jobId);
-  system(str);
-}
-*/
-
-/*class accessHandler{
-private:
-  condition_variable condition;
-public:
-  mutex m;
-  void announce(int *x){
-    for(int i=1 ; i<=*x ; i++){
-      condition.notify_one();
-    }
-  }
-  void freeze(){
-    unique_lock<mutex> locker(m);
-    condition.wait(locker);
-    locker.unlock();
-  }
-};*/
 
 void signalHandler( int SIGRECV){
   if(SIGRECV == SIGTERM){
