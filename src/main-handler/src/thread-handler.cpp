@@ -44,6 +44,7 @@ void threadHandler::threadFlow(int threadId){
     }
     printf("----Thread-%i: taking job %d, exercise type %d\n",threadId,job.jid, job.eid);
     container * local = new container(job.jid, job.eid);
+    local->preprocessing();
     local->containerCreate();
     local->jobResourceInsert("main","executable/");
     local->jobResourceInsert("config.json","");

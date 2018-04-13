@@ -8,6 +8,7 @@ private:
   char str[256];
 public:
   container(int, int);
+  void preprocessing();
   void containerCreate();
   void jobResourceInsert(const char *,const  char *);
   void jobResourceExtract(const char *,const  char *);

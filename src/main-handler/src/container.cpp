@@ -7,6 +7,10 @@ container::container(int jidLocal, int eidLocal){
     jobId=jidLocal;
     printf("OK\n");
 }
+void container::preprocessing(){
+    sprintf(str, "sudo g++ -g /var/epicnode/jobs/%d/main.cpp -o /var/epicnode/jobs/%d/main", jobId, jobId);
+    system(str);
+}
 void container::containerCreate(){
     sprintf(str, "sudo docker run -itd --name id%i mykkode/epicnode", jobId);
     system(str);
