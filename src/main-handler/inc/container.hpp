@@ -4,12 +4,15 @@
 class container{
 private:
   int jobId;
+  int exId;
   char str[256];
 public:
-  container(int jobIdLocal);
+  container(int, int);
   void containerCreate();
-  void resourceInsert(const char *,const  char *);
-  void resourceExtract(const char *,const  char *);
+  void jobResourceInsert(const char *,const  char *);
+  void jobResourceExtract(const char *,const  char *);
+  void exResourceInsert();
+  void exResourceExtract();
   void containerStop();
   void containerRemove();
   void containerExecute();

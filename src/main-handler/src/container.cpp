@@ -2,19 +2,28 @@
 #include <stdio.h>
 #include "../inc/container.hpp"
 
-container::container(int jobIdLocal){
-    jobId=jobIdLocal;
+container::container(int jidLocal, int eidLocal){
+    exId=eidLocal;
+    jobId=jidLocal;
     printf("OK\n");
 }
 void container::containerCreate(){
     sprintf(str, "sudo docker run -itd --name id%i mykkode/epicnode", jobId);
     system(str);
 }
-void container::resourceInsert(const char from[], const char to[]){
+void container::exResourceInsert(){
+    sprintf(str, "sudo docker cp /var/epicnode/ex/%i/input/ id%i:/var/epicnode/executable-handler/", exId, jobId);
+    system(str);
+}
+void container::exResourceExtract(){
+    sprintf(str, "sudo docker cp id%i:/var/epicnode/executable-handler/output/ /var/epicnode/jobs/%i/", jobId, jobId);
+    system(str);
+}
+void container::jobResourceInsert(const char from[], const char to[]){
     sprintf(str, "sudo docker cp /var/epicnode/jobs/%i/%s id%i:/var/epicnode/executable-handler/%s", jobId, from, jobId, to);
     system(str);
 }
-void container::resourceExtract(const char from[], const char to[]){
+void container::jobResourceExtract(const char from[], const char to[]){
     sprintf(str, "sudo docker cp id%i:/var/epicnode/executable-handler/%s /var/epicnode/jobs/%i/%s", jobId, from, jobId, to);
     system(str);
 }

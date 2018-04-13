@@ -13,7 +13,7 @@
 using namespace std;
 
 #define VERSION 1
-#define BUILD 244
+#define BUILD 304
 #define TITLE "EPICNODE - INGENNUS"
 
 int const NUMBER_OF_THREADS = 2;
@@ -66,7 +66,7 @@ int main(){
 
     printf("--Thread-h: connecting to database\n");
 
-    int JID, SID;
+    int JID, SID, EID;
     try{
 
       dbh->begin();
@@ -113,8 +113,9 @@ int main(){
 
         while(ps->next()){
           JID = ps->getInt("id");
+          EID = ps->getInt("eid");
           printf("--Thread-h: new job: %d\n",JID);
-          th->insertJob(JID);
+          th->insertJob(JID, EID);
         }
         ps->getMoreResults();
         usleep(1000);

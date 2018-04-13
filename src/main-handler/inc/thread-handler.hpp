@@ -10,19 +10,24 @@ using namespace std;
 
 class threadHandler{
 private:
+	struct compact {
+		int jid;
+		int eid;
+	};
 	vector < thread > threads;
 	vector < int > status;
-	vector <int> list;
+	vector < struct compact > list;
 	accessHandler * ah;
 	int locked, NUMBER_OF_THREADS;
+
 public:
-	threadHandler(accessHandler * localAh, int NOT);
+	threadHandler(accessHandler * , int);
 	void spawnThreads();
-	void threadFlow(int threadId);
-	void insertJob(int jid);
+	void threadFlow(int);
+	void insertJob(int, int);
 	void finishJob();
 	void finalizeThreads();
-	int getJob();
+	struct compact getJob();
 	int available();
 };
 

@@ -1,6 +1,7 @@
 using namespace std;
 
 #include "../inc/thread-handler.hpp"
+#include "../inc/container.hpp"
 
 threadHandler::threadHandler(accessHandler * localAh, int NOT){
   NUMBER_OF_THREADS = NOT;
@@ -32,27 +33,40 @@ void threadHandler::finalizeThreads(){
 }
 void threadHandler::threadFlow(int threadId){
   printf("----Thread-%i: is starting\n",threadId);
-  int job;
+
   while(1){
     ah -> freeze();
-    job = getJob();
+      struct compact job = getJob();
 
-    if(job == 0){
+    if(job.jid == 0){
       printf("----Thread-%i: thread safe exit\n",threadId);
       return ;
     }
-    printf("----Thread-%i: taking job %i\n",threadId,job);
-
-
-    printf("----Thread-%i: finished  job %i\n",threadId,job);
+    printf("----Thread-%i: taking job %d, exercise type %d\n",threadId,job.jid, job.eid);
+    container * local = new container(job.jid, job.eid);
+    local->containerCreate();
+    local->jobResourceInsert("main","executable/");
+    local->jobResourceInsert("config.json","");
+    local->exResourceInsert();
+    local->containerExecute();
+    local->containerStop();
+    local->jobResourceExtract("raport.json", "");
+    local->exResourceExtract();
+    local->containerRemove();
+    printf("----Thread-%i: finished  job %i\n",threadId,job.jid);
     finishJob();
+
   }
 }
 
-void threadHandler::insertJob(int jid){
+void threadHandler::insertJob(int jid, int eid){
   unique_lock<mutex> locker(ah->m);
-  
-  list.push_back(jid);
+
+  struct compact local;
+  local.jid = jid;
+  local.eid = eid;
+
+  list.push_back(local);
   printf("--Thread-h: inserted Job: %d\n",jid);
   ah->announce(1);
 
@@ -65,21 +79,22 @@ void threadHandler::finishJob(){
   locker.unlock();
 }
 
-int threadHandler::getJob(){
+struct threadHandler::compact threadHandler::getJob(){
   unique_lock<mutex> locker(ah->m);
 
   if(list.size()){
-    int toReturn = list.back();
+    struct compact toReturn = list.back();
     list.pop_back();
     locked++;
     locker.unlock();
     return toReturn;
   }
-  else{
-    locker.unlock();
-    return 0;
-  }
-  return 0;
+  locker.unlock();
+  struct compact local;
+  local.eid = 0;
+  local.jid = 0;
+  return local;
+
 }
 
 int threadHandler::available(){
