@@ -1,9 +1,10 @@
 dist: trusty
 sudo: true
 language: cpp
-before_install:
- - sudo apt-get update
- - sudo apt-get upgrade g++
- - sudo apt-get install libmysqlcppconn-dev
 script:
   - cd src/main-handler; make all
+addons:
+  apt:
+    packages:
+      - libmysqlcppconn-dev
+      - c++11
