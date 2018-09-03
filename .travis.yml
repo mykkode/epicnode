@@ -1,0 +1,7 @@
+dist: trusty
+sudo: false
+language: cpp
+install:
+  libmysqlcppconn-dev
+script:
+  - cd src/main-handler; make all
