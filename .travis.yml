@@ -1,7 +1,7 @@
 dist: trusty
 sudo: true
 language: cpp
-before-install:
+before_install:
   sudo apt-get update
   sudo apt-get install libmysqlcppconn-dev
 script:
