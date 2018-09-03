@@ -1,0 +1,10 @@
+dist: trusty
+sudo: false
+language: cpp
+script:
+  - cd src/main-handler; make all
+addons:
+  apt:
+    packages:
+      - libmysqlcppconn-dev
+      - c++11
