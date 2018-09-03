@@ -3,7 +3,7 @@ using namespace std;
 #ifndef DATABASEHANDLER_H
 #define DATABASEHANDLER_H
 
-#include "mysql_connection.h"
+#include "driver/mysql_connection.h"
 #include <cppconn/driver.h>
 #include <cppconn/exception.h>
 #include <cppconn/resultset.h>
