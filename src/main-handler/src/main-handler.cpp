@@ -13,7 +13,7 @@
 using namespace std;
 
 #define VERSION 1
-#define BUILD 396
+#define BUILD 401
 #define TITLE "EPICNODE - INGENNUS"
 
 int const NUMBER_OF_THREADS = 2;

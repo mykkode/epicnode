@@ -31,4 +31,4 @@ src/main-handler/update\.save
 
 src/main-handler/\.idea/
 
-src/main-handler/dependencies/
+src/main-handler/dependencies/json.hpp

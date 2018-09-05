@@ -2,12 +2,16 @@ dist: trusty
 sudo: false
 language: cpp
 script:
-  - cd src/main-handler/dependencies
+  - cd src/main-handler
+  - mkdir dependencies
+  - cd dependencies
   - wget https://raw.githubusercontent.com/nlohmann/json/develop/single_include/nlohmann/json.hpp
   - cd ..
   - make all
 addons:
   apt:
+    sources:
+      - ubuntu-toolchain-r-test
     packages:
       - libmysqlcppconn-dev
-      - c++11
+      - g++-7
