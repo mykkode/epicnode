@@ -2,7 +2,10 @@ dist: trusty
 sudo: false
 language: cpp
 script:
-  - cd src/main-handler; make all
+  - cd src/main-handler/dependencies
+  - wget https://raw.githubusercontent.com/nlohmann/json/develop/single_include/nlohmann/json.hpp
+  - cd ..
+  - make all
 addons:
   apt:
     packages:

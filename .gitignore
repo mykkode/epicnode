@@ -30,3 +30,5 @@ src/main-handler/update\.save\.1
 src/main-handler/update\.save
 
 src/main-handler/\.idea/
+
+src/main-handler/dependencies/
